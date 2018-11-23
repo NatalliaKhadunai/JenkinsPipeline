@@ -1,8 +1,8 @@
-stage 'Build'
 node{
-    if(isUnix()){
-        sh 'gradle build --info'    
-    } else {
-        bat 'gradle build --info'
+    stage('Checkout') {
+        git 'https://github.com/NatalliaKhadunai/JenkinsPipeline'
+    }
+    stage('Build') {
+        build 'Gradle Build Item'
     }
 }
