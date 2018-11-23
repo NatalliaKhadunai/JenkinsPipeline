@@ -1,21 +1,11 @@
-pipeline {
-    agent any
+node {
+    def rtGradle = Artifactory.newGradleBuild()
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+    stage('Clone sources') {
+        git url: 'https://github.com/NatalliaKhadunai/JenkinsPipeline'
+    }
+
+    stage('Gradle build') {
+        rtGradle.run tasks: 'build'
     }
 }
